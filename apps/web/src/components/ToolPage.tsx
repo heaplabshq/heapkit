@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { useDocumentMeta } from '../lib/useDocumentMeta'
+import { AdSlot } from './ui/AdSlot'
 
 export function ToolPage({
   title,
@@ -33,6 +34,8 @@ export function ToolPage({
         <h2 className="text-base font-medium text-ink-strong">{explainTitle}</h2>
         {explain}
       </article>
+
+      <AdSlot slot="tool-page-bottom" />
     </div>
   )
 }

@@ -39,8 +39,11 @@ export function Layout() {
         </Suspense>
       </main>
 
-      <footer className="border-t border-border py-6 text-center text-xs text-ink">
-        heapkit — free, browser-only developer tools. Nothing you enter is ever sent to a server.
+      <footer className="flex flex-col items-center gap-2 border-t border-border py-6 text-center text-xs text-ink">
+        <p>heapkit — free, browser-only developer tools. Nothing you enter is ever sent to a server.</p>
+        <Link to="/privacy" className="hover:text-ink-strong">
+          Privacy Policy
+        </Link>
       </footer>
     </div>
   )
