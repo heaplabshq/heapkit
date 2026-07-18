@@ -15,7 +15,25 @@ Working requirements doc. Brand: **Heap** (umbrella, consistent with existing he
 | PyPI `heapkit` / `heapkit-core` | Available |
 | GitHub org `heapkit` | Available |
 
-**Action:** register `heapkit.dev` (or `.io`) and the GitHub org before Phase 1 starts — names can disappear. Publish npm packages under the `@heapkit/*` scope, never a bare `heapkit` package.
+**Action:** register the GitHub org before it disappears. Publish npm packages under the `@heapkit/*` scope, never a bare `heapkit` package.
+
+**Domain strategy — superseded 2026-07-18:** heapkit isn't the only product under the Heap brand — heapcode, heapedit, and heapchat exist too (deployed already, no custom domain yet). Registering `heapkit.dev` alone would mean repeating that cost for each sibling product. A bare `heap.<tld>` umbrella domain isn't available anywhere checked (`.dev`/`.io`/`.app`/`.xyz`/`.co`/`.sh`/`.wtf`/`.zone`/`.digital` all taken — `.io` is Heap Analytics, a 10,000+ customer product-analytics company, and the others are likely defensively registered around it).
+
+Decided: **`heaplabs.dev`** as a shared umbrella domain (available, checked 2026-07-18), with each product on its own subdomain, one shared registration instead of four:
+
+```
+heaplabs.dev          → portfolio page listing all Heap products
+kit.heaplabs.dev       → heapkit
+code.heaplabs.dev      → heapcode
+edit.heaplabs.dev      → heapedit
+chat.heaplabs.dev      → heapchat
+```
+
+Each subdomain attaches independently to its own Cloudflare Pages project (separate repos, separate deploys) — only the DNS zone is shared. `heapkit.dev`/`.io` are no longer the plan; every domain reference below should be read as `kit.heaplabs.dev` until this doc's URLs are updated.
+
+**Known trade-off, accepted:** a keyword-rich root domain (`heapkit.dev`) is arguably marginally better for organic search than a subdomain of a less-relevant parent — Google generally treats subdomains as close to independent sites, but it's not a fully settled question. Traded off deliberately here for a 4x cost reduction across the whole product portfolio; revisit only if `kit.heaplabs.dev` demonstrably underperforms a root-domain competitor once there's real Search Console data to compare against.
+
+**Action:** register `heaplabs.dev`, add it as a Cloudflare zone, then attach `kit.heaplabs.dev` as a custom domain on the existing `heapkit` Pages project.
 
 ---
 
