@@ -1,0 +1,104 @@
+import { useState } from 'react'
+import { ToolPage } from '../components/ToolPage'
+import { CopyButton } from '../components/CopyButton'
+import { Button } from '../components/ui/Button'
+import { Checkbox } from '../components/ui/Checkbox'
+import { NumberField } from '../components/ui/NumberField'
+
+function generate(count: number, uppercase: boolean, noHyphens: boolean): string[] {
+  return Array.from({ length: count }, () => {
+    let id: string = crypto.randomUUID()
+    if (noHyphens) id = id.replace(/-/g, '')
+    if (uppercase) id = id.toUpperCase()
+    return id
+  })
+}
+
+export function UuidGenerator() {
+  const [count, setCount] = useState(5)
+  const [uppercase, setUppercase] = useState(false)
+  const [noHyphens, setNoHyphens] = useState(false)
+  const [uuids, setUuids] = useState(() => generate(5, false, false))
+
+  function regenerate(next: Partial<{ count: number; uppercase: boolean; noHyphens: boolean }>) {
+    const nextCount = next.count ?? count
+    const nextUppercase = next.uppercase ?? uppercase
+    const nextNoHyphens = next.noHyphens ?? noHyphens
+    setUuids(generate(nextCount, nextUppercase, nextNoHyphens))
+  }
+
+  return (
+    <ToolPage
+      title="UUID Generator"
+      description="Random RFC 4122 version 4 UUIDs, generated locally in your browser."
+      metaTitle="UUID Generator — v4 UUIDs, free and instant | heapkit"
+      metaDescription="Generate RFC 4122 version 4 UUIDs in your browser. Bulk generation, uppercase and no-hyphen formatting. Nothing leaves your device."
+      explainTitle="What is a UUID v4?"
+      explain={
+        <>
+          <p>
+            A UUID (Universally Unique Identifier) is a 128-bit value used to identify
+            information without a central coordinating authority. Version 4 UUIDs are generated
+            using random or pseudo-random numbers — of the 128 bits, 6 are fixed to mark the
+            version and variant, and the remaining 122 bits are random. With that many random
+            bits, collisions are astronomically unlikely even across billions of IDs.
+          </p>
+          <p>
+            They're commonly used as database primary keys, request/trace IDs, session tokens,
+            and file or resource identifiers — anywhere you need a unique ID without a central
+            sequence generator.
+          </p>
+        </>
+      }
+    >
+      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-border p-4">
+        <NumberField
+          label="Count"
+          value={count}
+          min={1}
+          max={100}
+          onChange={(next) => {
+            setCount(next)
+            regenerate({ count: next })
+          }}
+        />
+
+        <Checkbox
+          label="Uppercase"
+          checked={uppercase}
+          onChange={(next) => {
+            setUppercase(next)
+            regenerate({ uppercase: next })
+          }}
+        />
+
+        <Checkbox
+          label="No hyphens"
+          checked={noHyphens}
+          onChange={(next) => {
+            setNoHyphens(next)
+            regenerate({ noHyphens: next })
+          }}
+        />
+
+        <Button variant="primary" className="ml-auto" onClick={() => regenerate({})}>
+          Generate
+        </Button>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        {uuids.map((id, i) => (
+          <div
+            key={i}
+            className="flex items-center justify-between gap-3 rounded-md border border-border bg-surface px-3 py-2 font-mono text-sm text-ink-strong"
+          >
+            <span className="truncate">{id}</span>
+            <CopyButton text={id} />
+          </div>
+        ))}
+      </div>
+
+      <CopyButton text={uuids.join('\n')} />
+    </ToolPage>
+  )
+}
