@@ -54,7 +54,7 @@ export function Privacy() {
           <p>
             Questions about this policy? Open an issue on{' '}
             <a
-              href="https://github.com/sid7631/heapkit"
+              href="https://github.com/heaplabshq/heapkit"
               target="_blank"
               rel="noreferrer"
               className="underline hover:text-ink-strong"
