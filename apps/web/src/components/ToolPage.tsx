@@ -32,7 +32,7 @@ export function ToolPage({
         {children}
       </div>
 
-      <article className="article-body flex flex-col gap-3 border-t border-border pt-8 text-left text-[15px] text-ink">
+      <article className="article-body flex max-w-3xl flex-col gap-3 border-t border-border pt-8 text-left text-[15px] text-ink">
         <h2 className="text-base font-semibold text-ink-strong">{explainTitle}</h2>
         {explain}
       </article>

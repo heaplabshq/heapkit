@@ -7,7 +7,7 @@ export function Privacy() {
   )
 
   return (
-    <div className="article-body flex flex-col gap-6 text-left">
+    <div className="article-body flex max-w-3xl flex-col gap-6 text-left">
       <h1 className="text-2xl font-semibold tracking-tight text-ink-strong">Privacy Policy</h1>
 
       <div className="flex flex-col gap-6 text-[15px] text-ink">

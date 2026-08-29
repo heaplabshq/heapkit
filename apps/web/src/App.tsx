@@ -14,6 +14,12 @@ const HashGenerator = lazy(() =>
 )
 const JwtDecoder = lazy(() => import('./pages/JwtDecoder').then((m) => ({ default: m.JwtDecoder })))
 const CronBuilder = lazy(() => import('./pages/CronBuilder').then((m) => ({ default: m.CronBuilder })))
+const EmiCalculator = lazy(() =>
+  import('./pages/EmiCalculator').then((m) => ({ default: m.EmiCalculator })),
+)
+const MutualFundCalculator = lazy(() =>
+  import('./pages/MutualFundCalculator').then((m) => ({ default: m.MutualFundCalculator })),
+)
 const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
 
@@ -32,6 +38,8 @@ function App() {
         <Route path="/hash-generator" element={<HashGenerator />} />
         <Route path="/jwt-decoder" element={<JwtDecoder />} />
         <Route path="/cron-builder" element={<CronBuilder />} />
+        <Route path="/emi-calculator" element={<EmiCalculator />} />
+        <Route path="/mutual-fund-calculator" element={<MutualFundCalculator />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
       </Route>

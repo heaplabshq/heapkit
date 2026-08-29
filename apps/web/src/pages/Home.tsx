@@ -5,6 +5,7 @@ import {
   ArrowRightIcon,
   BinaryIcon,
   BracesIcon,
+  CalculatorIcon,
   CheckCircleIcon,
   CheckIcon,
   ClockIcon,
@@ -15,6 +16,7 @@ import {
   HashIcon,
   KeyIcon,
   ShieldCheckIcon,
+  TrendingUpIcon,
 } from '../components/icons'
 
 type Tool = {
@@ -85,6 +87,18 @@ const tools: Tool[] = [
     description: 'Build a cron expression visually, with next run times.',
     icon: ClockIcon,
   },
+  {
+    href: '/emi-calculator',
+    name: 'EMI Calculator',
+    description: 'Estimate loan payments, total interest, and amortization schedule.',
+    icon: CalculatorIcon,
+  },
+  {
+    href: '/mutual-fund-calculator',
+    name: 'Mutual Fund Return Calculator',
+    description: 'Estimate SIP and lump-sum mutual fund growth with charts.',
+    icon: TrendingUpIcon,
+  },
 ]
 
 const highlights = ['100% in your browser', 'No sign-up, no limits', 'Free forever']
@@ -125,7 +139,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="grid w-full gap-4 sm:grid-cols-2">
+      <section className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {tools.map((tool) => {
           const Icon = tool.icon
           return (

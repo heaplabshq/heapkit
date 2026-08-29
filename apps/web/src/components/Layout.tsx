@@ -10,6 +10,8 @@ const NAV = [
   { to: '/hash-generator', label: 'Hash', prefix: '/hash' },
   { to: '/jwt-decoder', label: 'JWT', prefix: '/jwt' },
   { to: '/cron-builder', label: 'Cron', prefix: '/cron' },
+  { to: '/emi-calculator', label: 'EMI', prefix: '/emi' },
+  { to: '/mutual-fund-calculator', label: 'Mutual Fund', prefix: '/mutual-fund' },
 ]
 
 export function Layout() {
@@ -22,10 +24,10 @@ export function Layout() {
       </div>
 
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-lg">
-        <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="flex h-14 w-full items-center gap-6 px-4 sm:px-6 lg:px-8">
           <Link
             to="/"
-            className="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-ink-strong"
+            className="flex shrink-0 items-center gap-2 text-[15px] font-semibold tracking-tight text-ink-strong"
           >
             <Logo className="h-6 w-6" />
             heapkit
@@ -52,7 +54,7 @@ export function Layout() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6">
+      <main className="w-full flex-1 px-4 py-10 sm:px-6 lg:px-8">
         <Suspense
           fallback={
             <div className="flex justify-center py-24">
@@ -65,7 +67,7 @@ export function Layout() {
       </main>
 
       <footer className="border-t border-border">
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-3 px-4 py-8 text-center text-sm text-ink sm:flex-row sm:justify-between sm:px-6 sm:text-left">
+        <div className="flex w-full flex-col items-center gap-3 px-4 py-8 text-center text-sm text-ink sm:flex-row sm:justify-between sm:px-6 sm:text-left lg:px-8">
           <p>© {new Date().getFullYear()} heapkit — nothing you enter is ever sent to a server.</p>
           <div className="flex items-center gap-5">
             <Link to="/privacy" className="transition hover:text-ink-strong">
