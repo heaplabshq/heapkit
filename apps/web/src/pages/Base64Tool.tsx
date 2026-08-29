@@ -99,7 +99,7 @@ export function Base64Tool() {
             </label>
             <CopyButton text={output} />
           </div>
-          <TextArea value={error ?? output} readOnly rows={8} error={Boolean(error)} className="bg-surface" />
+          <TextArea value={error ?? output} readOnly rows={8} error={Boolean(error)} className="bg-surface-muted" />
         </div>
       </div>
     </ToolPage>

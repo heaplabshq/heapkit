@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { copyToClipboard } from '../lib/clipboard'
+import { CheckIcon, CopyIcon } from './icons'
 import { Button } from './ui/Button'
 
 export function CopyButton({ text, disabled }: { text: string; disabled?: boolean }) {
@@ -15,7 +16,8 @@ export function CopyButton({ text, disabled }: { text: string; disabled?: boolea
 
   return (
     <Button variant="secondary" onClick={handleClick} disabled={disabled || !text}>
-      {copied ? 'Copied!' : 'Copy'}
+      {copied ? <CheckIcon className="h-3.5 w-3.5 text-success" /> : <CopyIcon className="h-3.5 w-3.5" />}
+      {copied ? 'Copied' : 'Copy'}
     </Button>
   )
 }

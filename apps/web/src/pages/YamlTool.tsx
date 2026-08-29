@@ -53,7 +53,7 @@ function YamlPanel({ mode }: { mode: Mode }) {
             </label>
             <CopyButton text={output} />
           </div>
-          <TextArea value={error ?? output} readOnly rows={12} error={Boolean(error)} className="bg-surface" />
+          <TextArea value={error ?? output} readOnly rows={12} error={Boolean(error)} className="bg-surface-muted" />
         </div>
       </div>
     </>

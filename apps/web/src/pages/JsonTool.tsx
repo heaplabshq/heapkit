@@ -65,7 +65,7 @@ function FormatValidatePanel({ mode }: { mode: 'format' | 'validate' }) {
             </label>
             <CopyButton text={output} />
           </div>
-          <TextArea value={error ?? output} readOnly rows={12} error={Boolean(error)} className="bg-surface" />
+          <TextArea value={error ?? output} readOnly rows={12} error={Boolean(error)} className="bg-surface-muted" />
         </div>
       </div>
     </>
@@ -113,7 +113,7 @@ function DiffPanel() {
             comparing smaller sections.
           </p>
         ) : (
-          <div className="overflow-x-auto rounded-md border border-border bg-surface">
+          <div className="overflow-x-auto rounded-lg border border-border bg-surface-muted">
             {lines.length === 0 ? (
               <p className="p-3 text-sm text-ink">Paste JSON on both sides to see the diff.</p>
             ) : (

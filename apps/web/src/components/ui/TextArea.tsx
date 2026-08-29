@@ -5,8 +5,8 @@ type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & { error?: boo
 export function TextArea({ className = '', error = false, ...props }: TextAreaProps) {
   return (
     <textarea
-      className={`w-full rounded-md border bg-transparent p-3 font-mono text-sm text-ink-strong placeholder:text-ink ${
-        error ? 'border-danger text-danger' : 'border-border'
+      className={`min-h-24 w-full rounded-lg border bg-surface p-3 font-mono text-sm leading-relaxed text-ink-strong shadow-xs transition placeholder:text-ink/60 focus:border-accent-border focus:outline-none focus:ring-2 focus:ring-accent-subtle ${
+        error ? 'border-danger focus:border-danger focus:ring-danger-subtle' : 'border-border'
       } ${className}`}
       {...props}
     />

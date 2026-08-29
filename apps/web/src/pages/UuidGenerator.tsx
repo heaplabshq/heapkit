@@ -51,7 +51,7 @@ export function UuidGenerator() {
         </>
       }
     >
-      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-border p-4">
+      <div className="flex flex-wrap items-center gap-4 rounded-lg bg-surface-muted p-4">
         <NumberField
           label="Count"
           value={count}
@@ -90,7 +90,7 @@ export function UuidGenerator() {
         {uuids.map((id, i) => (
           <div
             key={i}
-            className="flex items-center justify-between gap-3 rounded-md border border-border bg-surface px-3 py-2 font-mono text-sm text-ink-strong"
+            className="flex items-center justify-between gap-3 rounded-lg bg-surface-muted px-3 py-2 font-mono text-sm text-ink-strong"
           >
             <span className="truncate">{id}</span>
             <CopyButton text={id} />

@@ -65,7 +65,7 @@ export function JwtDecoder() {
                 readOnly
                 rows={8}
                 error={Boolean(decoded.header.error)}
-                className="bg-surface"
+                className="bg-surface-muted"
               />
             </div>
 
@@ -75,11 +75,11 @@ export function JwtDecoder() {
                 <CopyButton text={decoded.payload.text} />
               </div>
               <TextArea
-                value={decoded.payload.error ?? decoded.payload.text}
-                readOnly
-                rows={8}
-                error={Boolean(decoded.payload.error)}
-                className="bg-surface"
+            value={decoded.payload.error ?? decoded.payload.text}
+            readOnly
+            rows={8}
+            error={Boolean(decoded.payload.error)}
+            className="bg-surface-muted"
               />
             </div>
           </div>
@@ -89,7 +89,7 @@ export function JwtDecoder() {
               <label className="text-sm font-medium text-ink-strong">Signature (raw, unverified)</label>
               <CopyButton text={decoded.signature} />
             </div>
-            <div className="truncate rounded-md border border-border bg-surface px-3 py-2 font-mono text-sm text-ink">
+            <div className="truncate rounded-lg bg-surface-muted px-3 py-2 font-mono text-sm text-ink">
               {decoded.signature}
             </div>
           </div>

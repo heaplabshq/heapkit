@@ -29,7 +29,7 @@ function CronFieldEditor({
   onChange: (state: FieldState) => void
 }) {
   return (
-    <div className="flex flex-col gap-2 rounded-md border border-border p-3">
+    <div className="flex flex-col gap-2 rounded-lg bg-surface-muted p-3">
       <span className="text-sm font-medium text-ink-strong">{label}</span>
       <SegmentedControl
         value={state.mode}
@@ -58,7 +58,7 @@ function CronFieldEditor({
           value={state.specific ?? ''}
           onChange={(e) => onChange({ ...state, specific: e.target.value })}
           placeholder={placeholder}
-          className="rounded-md border border-border bg-transparent px-2 py-1 text-sm text-ink-strong"
+          className="rounded-lg border border-border bg-surface px-2 py-1 text-sm text-ink-strong transition focus:border-accent-border focus:outline-none focus:ring-2 focus:ring-accent-subtle"
         />
       )}
 
@@ -182,7 +182,7 @@ export function CronBuilder() {
         />
       </div>
 
-      <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-surface px-3 py-2">
+      <div className="flex items-center justify-between gap-3 rounded-lg bg-surface-muted px-3 py-2">
         <span className="font-mono text-sm text-ink-strong">{expression}</span>
         <CopyButton text={expression} />
       </div>

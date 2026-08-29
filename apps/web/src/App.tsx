@@ -15,6 +15,7 @@ const HashGenerator = lazy(() =>
 const JwtDecoder = lazy(() => import('./pages/JwtDecoder').then((m) => ({ default: m.JwtDecoder })))
 const CronBuilder = lazy(() => import('./pages/CronBuilder').then((m) => ({ default: m.CronBuilder })))
 const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
+const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/jwt-decoder" element={<JwtDecoder />} />
         <Route path="/cron-builder" element={<CronBuilder />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

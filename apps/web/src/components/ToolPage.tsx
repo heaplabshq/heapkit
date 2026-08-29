@@ -23,15 +23,17 @@ export function ToolPage({
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-2xl font-medium tracking-tight text-ink-strong">{title}</h1>
-        <p className="mt-1 text-sm text-ink">{description}</p>
+      <header className="flex flex-col gap-1.5">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink-strong">{title}</h1>
+        <p className="max-w-2xl text-[15px] text-ink">{description}</p>
+      </header>
+
+      <div className="flex flex-col gap-6 rounded-xl border border-border bg-surface p-4 shadow-soft sm:p-6">
+        {children}
       </div>
 
-      {children}
-
-      <article className="flex flex-col gap-2 border-t border-border pt-8 text-left text-sm text-ink">
-        <h2 className="text-base font-medium text-ink-strong">{explainTitle}</h2>
+      <article className="article-body flex flex-col gap-3 border-t border-border pt-8 text-left text-[15px] text-ink">
+        <h2 className="text-base font-semibold text-ink-strong">{explainTitle}</h2>
         {explain}
       </article>
 

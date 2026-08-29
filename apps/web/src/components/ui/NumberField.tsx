@@ -23,7 +23,7 @@ export function NumberField({
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(Math.min(max, Math.max(min, Number(e.target.value) || min)))}
-        className="w-16 rounded-md border border-border bg-transparent px-2 py-1 text-ink-strong disabled:cursor-not-allowed"
+        className="w-16 rounded-lg border border-border bg-surface px-2 py-1 text-sm text-ink-strong shadow-xs transition focus:border-accent-border focus:outline-none focus:ring-2 focus:ring-accent-subtle disabled:cursor-not-allowed"
       />
     </label>
   )

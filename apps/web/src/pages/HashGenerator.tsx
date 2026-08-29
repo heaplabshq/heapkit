@@ -65,7 +65,7 @@ export function HashGenerator() {
         {HASH_ALGORITHMS.map((algorithm) => (
           <div
             key={algorithm}
-            className="flex items-center gap-3 rounded-md border border-border bg-surface px-3 py-2"
+            className="flex items-center gap-3 rounded-lg bg-surface-muted px-3 py-2"
           >
             <span className="w-20 shrink-0 text-sm font-medium text-ink-strong">{algorithm}</span>
             <span className="flex-1 truncate font-mono text-sm text-ink">{hashes[algorithm] ?? '—'}</span>
