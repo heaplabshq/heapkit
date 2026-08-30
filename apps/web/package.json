@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && tsx scripts/generate-sitemap.ts",
     "lint": "oxlint",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler pages deploy dist --project-name=heapkit --force"
@@ -24,8 +24,10 @@
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
     "typescript": "~6.0.2",
     "vite": "^8.1.1",
+    "vite-plugin-ssg": "^0.1.0",
     "wrangler": "^4.112.0"
   }
 }

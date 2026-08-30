@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { tools } from './tools/registry'
 
 const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })))
 const UuidGenerator = lazy(() =>
@@ -41,6 +42,31 @@ function App() {
         <Route path="/emi-calculator" element={<EmiCalculator />} />
         <Route path="/mutual-fund-calculator" element={<MutualFundCalculator />} />
         <Route path="/privacy" element={<Privacy />} />
+        {tools.map((tool) => {
+          const pageMap: Record<string, any> = {
+            'uuid-generator': UuidGenerator,
+            'base64': Base64Tool,
+            'json-formatter': JsonTool,
+            'json-validator': JsonTool,
+            'json-diff': JsonTool,
+            'yaml-validator': YamlTool,
+            'yaml-to-json': YamlTool,
+            'hash-generator': HashGenerator,
+            'jwt-decoder': JwtDecoder,
+            'cron-builder': CronBuilder,
+            'emi-calculator': EmiCalculator,
+            'mutual-fund-calculator': MutualFundCalculator,
+            'privacy': Privacy,
+          }
+          const Component = pageMap[tool.slug] || NotFound
+          return (
+            <Route
+              key={tool.slug}
+              path={`/${tool.slug}`}
+              element={<Component initialMode={tool.name} />}
+            />
+          )
+        })}
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
