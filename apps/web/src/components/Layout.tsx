@@ -51,6 +51,15 @@ export function Layout() {
               )
             })}
           </nav>
+          <a
+            href="https://github.com/heaplabshq/heapkit"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 transition hover:text-ink-strong ml-auto"
+          >
+            <GithubIcon className="h-4 w-4" />
+            GitHub
+          </a>
         </div>
       </header>
 
@@ -73,15 +82,6 @@ export function Layout() {
             <Link to="/privacy" className="transition hover:text-ink-strong">
               Privacy
             </Link>
-            <a
-              href="https://github.com/heaplabshq/heapkit"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1.5 transition hover:text-ink-strong"
-            >
-              <GithubIcon className="h-4 w-4" />
-              GitHub
-            </a>
           </div>
         </div>
       </footer>

@@ -58,7 +58,7 @@ export function Home() {
         </div>
 
         <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-ink-strong sm:text-5xl">
-          Developer tools that{' '}
+          Tools that{' '}
           <span className="bg-gradient-to-r from-accent to-accent-strong bg-clip-text text-transparent">
             just work
           </span>
