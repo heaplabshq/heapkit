@@ -23,6 +23,20 @@ const MutualFundCalculator = lazy(() =>
 )
 const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
+const TimestampConverter = lazy(() =>
+  import('./pages/TimestampConverter').then((m) => ({ default: m.TimestampConverter })),
+)
+const RegexTester = lazy(() =>
+  import('./pages/RegexTester').then((m) => ({ default: m.RegexTester })),
+)
+const UrlEncoderDecoder = lazy(() =>
+  import('./pages/UrlEncoderDecoder').then((m) => ({ default: m.UrlEncoderDecoder })),
+)
+const UrlParser = lazy(() => import('./pages/UrlParser').then((m) => ({ default: m.UrlParser })))
+const XmlFormatter = lazy(() => import('./pages/XmlFormatter').then((m) => ({ default: m.XmlFormatter })))
+const CssFormatter = lazy(() => import('./pages/CssFormatter').then((m) => ({ default: m.CssFormatter })))
+const JsFormatter = lazy(() => import('./pages/JsFormatter').then((m) => ({ default: m.JsFormatter })))
+const SqlFormatter = lazy(() => import('./pages/SqlFormatter').then((m) => ({ default: m.SqlFormatter })))
 
 function App() {
   return (
@@ -57,6 +71,14 @@ function App() {
             'emi-calculator': EmiCalculator,
             'mutual-fund-calculator': MutualFundCalculator,
             'privacy': Privacy,
+            'timestamp-converter': TimestampConverter,
+            'regex-tester': RegexTester,
+            'url-encoder-decoder': UrlEncoderDecoder,
+            'url-parser': UrlParser,
+            'xml-formatter': XmlFormatter,
+            'css-formatter': CssFormatter,
+            'javascript-formatter': JsFormatter,
+            'sql-formatter': SqlFormatter,
           }
           const Component = pageMap[tool.slug] || NotFound
           return (

@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 import { Link } from 'react-router-dom'
 import { useDocumentMeta } from '../lib/useDocumentMeta'
+import { tools } from '../tools/registry'
 import {
   ArrowRightIcon,
   BinaryIcon,
@@ -19,89 +20,28 @@ import {
   TrendingUpIcon,
 } from '../components/icons'
 
-type Tool = {
-  href: string
-  name: string
-  description: string
-  icon: ComponentType<{ className?: string }>
+const slugToIcon: Record<string, ComponentType<{ className?: string }>> = {
+  'json-formatter': BracesIcon,
+  'json-validator': CheckCircleIcon,
+  'json-diff': DiffIcon,
+  'yaml-validator': FileTextIcon,
+  'yaml-to-json': ConvertIcon,
+  'uuid-generator': DiceIcon,
+  'base64': BinaryIcon,
+  'hash-generator': HashIcon,
+  'jwt-decoder': KeyIcon,
+  'cron-builder': ClockIcon,
+  'emi-calculator': CalculatorIcon,
+  'mutual-fund-calculator': TrendingUpIcon,
+  'timestamp-converter': ConvertIcon,
+  'regex-tester': DiceIcon,
+  'url-encoder-decoder': BinaryIcon,
+  'url-parser': KeyIcon,
+  'xml-formatter': FileTextIcon,
+  'css-formatter': BracesIcon,
+  'javascript-formatter': BracesIcon,
+  'sql-formatter': KeyIcon,
 }
-
-const tools: Tool[] = [
-  {
-    href: '/json-formatter',
-    name: 'JSON Formatter',
-    description: 'Beautify, minify, and sort keys in JSON.',
-    icon: BracesIcon,
-  },
-  {
-    href: '/json-validator',
-    name: 'JSON Validator',
-    description: 'Check whether text is valid JSON and see the exact parser error.',
-    icon: CheckCircleIcon,
-  },
-  {
-    href: '/json-diff',
-    name: 'JSON Diff',
-    description: 'Compare two JSON documents line by line.',
-    icon: DiffIcon,
-  },
-  {
-    href: '/yaml-validator',
-    name: 'YAML Validator',
-    description: 'Check whether text is valid YAML and see the exact parser error.',
-    icon: FileTextIcon,
-  },
-  {
-    href: '/yaml-to-json',
-    name: 'YAML to JSON',
-    description: 'Convert YAML to formatted JSON.',
-    icon: ConvertIcon,
-  },
-  {
-    href: '/uuid-generator',
-    name: 'UUID Generator',
-    description: 'Generate RFC 4122 v4 UUIDs, in bulk, with formatting options.',
-    icon: DiceIcon,
-  },
-  {
-    href: '/base64',
-    name: 'Base64 Encoder / Decoder',
-    description: 'Encode or decode text to Base64, including the URL-safe variant.',
-    icon: BinaryIcon,
-  },
-  {
-    href: '/hash-generator',
-    name: 'Hash Generator',
-    description: 'Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes.',
-    icon: HashIcon,
-  },
-  {
-    href: '/jwt-decoder',
-    name: 'JWT Decoder',
-    description: 'Decode a JWT header and payload, with expiry status.',
-    icon: KeyIcon,
-  },
-  {
-    href: '/cron-builder',
-    name: 'Cron Builder',
-    description: 'Build a cron expression visually, with next run times.',
-    icon: ClockIcon,
-  },
-  {
-    href: '/emi-calculator',
-    name: 'EMI Calculator',
-    description: 'Estimate loan payments, total interest, and amortization schedule.',
-    icon: CalculatorIcon,
-  },
-  {
-    href: '/mutual-fund-calculator',
-    name: 'Mutual Fund Return Calculator',
-    description: 'Estimate SIP and lump-sum mutual fund growth with charts.',
-    icon: TrendingUpIcon,
-  },
-]
-
-const highlights = ['100% in your browser', 'No sign-up, no limits', 'Free forever']
 
 export function Home() {
   useDocumentMeta(
@@ -130,7 +70,7 @@ export function Home() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink">
-          {highlights.map((item) => (
+          {['100% in your browser', 'No sign-up, no limits', 'Free forever'].map((item) => (
             <span key={item} className="flex items-center gap-1.5">
               <CheckIcon className="h-4 w-4 text-success" />
               {item}
@@ -141,11 +81,11 @@ export function Home() {
 
       <section className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {tools.map((tool) => {
-          const Icon = tool.icon
+          const Icon = slugToIcon[tool.slug] || DiceIcon
           return (
             <Link
-              key={tool.href}
-              to={tool.href}
+              key={tool.slug}
+              to={tool.slug}
               className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 text-left shadow-xs transition hover:-translate-y-0.5 hover:border-accent-border hover:shadow-lift"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-subtle text-accent">
@@ -165,3 +105,4 @@ export function Home() {
     </div>
   )
 }
+
