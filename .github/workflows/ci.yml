@@ -1,0 +1,63 @@
+name: CI
+
+# Until now heapkit only ever shipped by someone running `npm run deploy` from
+# apps/web by hand, which means the live site is whatever was last on that
+# person's laptop — not necessarily what's on main. This builds every push and
+# PR, and deploys main from the exact artifact that just passed.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Lets a stale site be redeployed without an empty commit.
+  workflow_dispatch:
+
+# One job, not a build job feeding a deploy job: this repo is a single site, so
+# splitting them would only add an artifact round-trip to hand `dist/` across.
+# The deploy step is gated instead, so PRs get the build check and nothing else.
+defaults:
+  run:
+    working-directory: apps/web
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+
+      # `npm run build` is `tsc -b && vite build && generate-sitemap`, so this
+      # is the typecheck too — there's no separate typecheck script to run.
+      - run: npm run build
+
+      # Only main deploys, and only on a real push — a PR from a fork must not
+      # be able to reach the production project, and workflow_dispatch on a
+      # branch other than main shouldn't push that branch live either.
+      #
+      # No `if: secrets... != ''` guard: a missing token should fail loudly
+      # rather than leave a green run that silently skipped the deploy.
+      # wranglerVersion is pinned to the same 4.112.0 in apps/web/package-lock.json,
+      # so CI and a local `npm run deploy` can't drift onto different wranglers.
+      - name: Deploy to Cloudflare Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # No accountId, matching heapcode: the token is scoped to a single
+          # account, so wrangler resolves it. Add `accountId:` with a
+          # CLOUDFLARE_ACCOUNT_ID secret if a token ever sees more than one and
+          # wrangler starts erroring that the account is ambiguous.
+          workingDirectory: apps/web
+          wranglerVersion: "4.112.0"
+          # No `--force`: that flag exists locally to get past a dirty working
+          # tree, and a CI checkout is always clean.
+          command: pages deploy dist --project-name=heapkit
