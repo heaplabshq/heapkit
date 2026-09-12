@@ -52,10 +52,13 @@ jobs:
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          # No accountId, matching heapcode: the token is scoped to a single
-          # account, so wrangler resolves it. Add `accountId:` with a
-          # CLOUDFLARE_ACCOUNT_ID secret if a token ever sees more than one and
-          # wrangler starts erroring that the account is ambiguous.
+          # Required, not optional. A token scoped to just "Cloudflare Pages:
+          # Edit" can deploy but cannot *list* accounts — enumerating them is a
+          # separate User > Memberships > Read permission — so wrangler can't
+          # infer the target and fails with "Failed to automatically retrieve
+          # account IDs for the logged in user." Passing it explicitly is what
+          # Cloudflare's own CI docs do, and it keeps the token minimally scoped.
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: apps/web
           wranglerVersion: "4.112.0"
           # No `--force`: that flag exists locally to get past a dirty working
